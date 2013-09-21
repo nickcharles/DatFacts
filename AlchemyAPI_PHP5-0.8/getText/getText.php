@@ -3,17 +3,14 @@
 include "AlchemyAPI.php";
 
 $alchemyObj = new AlchemyAPI();
-
 $alchemyObj->loadAPIKey("api_key.txt");
-
-$subject = "lynx";
+$subject = "cat";
 
 $file = fopen("$subject.xml", 'a');
-
-$title= $alchemyObj->URLGetTitle("http://en.wikipedia.org/wiki/$subject");
+$title = $alchemyObj->URLGetTitle("http://en.wikipedia.org/wiki/$subject");
 $text = $alchemyObj->URLGetText("http://en.wikipedia.org/wiki/$subject");
-fwrite($file, "$title<br/><br/>\n");
-fwrite($file, "$text<br/><br/>\n");
+fwrite($file, $title);
+fwrite($file, $text);
 fclose($file);
 
 ?>
