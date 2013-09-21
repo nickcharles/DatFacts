@@ -6,8 +6,15 @@ $alchemyObj = new AlchemyAPI();
 
 $alchemyObj->loadAPIKey("api_key.txt");
 
-$result = $alchemyObj->URLGetText("http://en.wikipedia.org/wiki/Coitus");
-echo "$result<br/><br/>\n";
+$subject = "lynx";
+
+$file = fopen("$subject.xml", 'a');
+
+$title= $alchemyObj->URLGetTitle("http://en.wikipedia.org/wiki/$subject");
+$text = $alchemyObj->URLGetText("http://en.wikipedia.org/wiki/$subject");
+fwrite($file, "$title<br/><br/>\n");
+fwrite($file, "$text<br/><br/>\n");
+fclose($file);
 
 ?>
 
