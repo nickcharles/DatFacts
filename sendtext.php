@@ -15,7 +15,7 @@ $sms = $client->account->sms_messages->create(
 );
 */
 $connection = new MongoClient();
-$phoneCollection = $connection->datfacts->phone;
+$phoneCollection = $connection->datfacts->numbers;
 $factsCollection = $connection->datfacts->facts;
 
 $phoneCursor = $phoneCollection->find();
@@ -25,13 +25,17 @@ foreach($phoneCursor as $phoneDocument){
 	$subject = $phoneDocument["subject"];
 
 	$query = array("subject" => $subject);
-	$factDocument = $factsCollection->find($query);
-	
-	$factArray = $factDocument["facts"];
+	$factCursor = $factsCollection->find($query);
+	$factDocument = $factCursor->getNext();
+	var_dump($factDocument);
+		
+	$factArray = $factDocument["factArray"];
 	$randomFact = $factArray[array_rand($factArray)];
-	//YOU ARENT DONE WITH THIS, YOU ARE MAKING TEST FUNCTIONS	
-	$sms	
-	
+	$sms = $client->account->sms_messages->create(
+    		"734-393-4311", // From this number
+    		$number, // To this number
+   		$randomFact
+	);
 } 
 // Display a confirmation message on the screen
-//echo "Sent message {$sms->sid}";
+echo "Sent message";
