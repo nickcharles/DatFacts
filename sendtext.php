@@ -18,21 +18,33 @@ while(1){
 	foreach($phoneCursor as $phoneDocument){
 		$number = $phoneDocument["number"];
 		$subject = $phoneDocument["subject"];
-
+		$count = $phoneDocument["count"];
+		
 		$query = array("subject" => $subject);
 		$factCursor = $factsCollection->find($query);
 		$factDocument = $factCursor->getNext();
-		var_dump($factDocument);
 			
 		$factArray = $factDocument["factArray"];
 		$randomFact = $factArray[array_rand($factArray)];
-		$sms = $client->account->sms_messages->create(
-			"734-393-4311", // From this number
-			$number, // To this number
-			$randomFact
-		);
+		$message = "Your " . $subject . " fact: " . $randomFact;
+		try {
+			$sms = $client->account->messages->sendMessage(
+				"734-393-4311", // From this number
+				$number, // To this number
+				$message
+			);
+			
+			$count++;
+			if ($count > 3){
+				$phoneCollection->remove(array("number" => $number));
+			}
+			$phoneCollection->update(array("number" => $number), array('$set' => array("count" => $count)));
+		} catch (Exception $e){
+			echo "Exception!", $e;
+			$phoneCollection->remove(array("number" => $number));
+		}
 	}
-	$randInt = rand(5,15);
-	echo "Number of sleep seconds is: ", $randInt;
+	$randInt = rand(20,120);
+	echo "Number of sleep seconds is: ", $randInt, "\n";
 	sleep($randInt);
 } 
