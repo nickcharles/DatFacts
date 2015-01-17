@@ -1,5 +1,5 @@
 from flask import *
-from firebase import firebase
+from firebase_wrapper import addNumber
 import re
 import string
 
@@ -29,6 +29,7 @@ def handle(number, subject):
     # Validate input
     (number, subject) = validateInput(number, subject)
     # Add to database
+    addNumber(number, subject)
     # Begin texting
     return render_template("index.html")
 
