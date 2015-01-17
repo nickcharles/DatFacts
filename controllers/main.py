@@ -5,16 +5,16 @@ import string
 
 main = Blueprint('main', __name__, template_folder='views')
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def main_route():
 	if request.method == 'POST':
-		# phoneNum = checkPhoneNum(request.form['phoneNum'])
-		# subject = checkSubject(request.form['subject'])
+		phoneNum = checkPhoneNum(request.form['phoneNum'])
+		subject = checkSubject(request.form['subject'])
 		addSubscriber(phoneNum, subject)
 		return render_template("index.html", phoneNum=phoneNum, subject=subject)
 	return render_template("index.html");
 
-@main.route('/unsubscribe')
+@main.route('/unsubscribe', methods=['GET', 'POST'])
 def unsubscribe():
 	if request.method == 'POST':
 		phoneNum = request.form['yourNum']
@@ -35,12 +35,12 @@ def checkPhoneNum(number):
 	isPhoneNum = re.compile("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$");
 	if not isPhoneNum.match(number):
 		return None
-	re.sub("[^0-9]", "", number)
+	number = re.sub("[^0-9]", "", number)
 	return number
 
 def checkSubject(subject):
-	if subject is None or subject == string.empty:
-		return 'cat'
+	# if subject is None or subject == string.empty:
+		# return 'cat'
 
 	return subject
 
