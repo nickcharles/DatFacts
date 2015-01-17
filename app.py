@@ -3,9 +3,6 @@ import controllers
 
 app = Flask(__name__, template_folder='views')
 
-app.register_blueprint(controllers.album)
-app.register_blueprint(controllers.albums)
-app.register_blueprint(controllers.pic)
 app.register_blueprint(controllers.main)
 
 # comment this out using a WSGI like gunicorn
