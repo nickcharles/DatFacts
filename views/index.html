@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Welcome to DatFacts</h1>
-    <p class="center">We are now accepting acquisition offers.</p>
 
-    <h2>Add Subscriber</h2>
-    <form class="addSub" method="post" action="/">
-    	<input type="text" name="phoneNum" placeholder="Victim Phone Number">
-    	<input type="text" name="subject" placeholder="Subject">
-    	<input type="submit" value="Submit">
+    <p class="center">We are now accepting acquisition offers. Bidding starts at fifty bones.</p>
+    <form method="post">
+        <p>Phone Number<input name="number"></p>
+        <p>Topic<input name="topic"></p>
+        <button>Submit</button>
     </form>
 {% endblock %}
