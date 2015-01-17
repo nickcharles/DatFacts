@@ -20,7 +20,6 @@ def deleteNumber(number):
         request = requests.delete('https://luminous-fire-1975.firebaseio.com/phoneNumbers/' + number + '.json')
 
 
-#2488427486
 def verifySubject(subject):
     return True
 
