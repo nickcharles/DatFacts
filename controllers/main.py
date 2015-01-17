@@ -1,16 +1,18 @@
 from flask import *
 from firebase import firebase
+import re
+import string
 
 main = Blueprint('main', __name__, template_folder='views')
 
 @main.route('/')
 def main_route():
 	if request.method == 'POST':
-		phoneNum = checkPhoneNum(request.form['phoneNum'])
-		subject = checkSubject(subjecrequest.form['subject'])
+		# phoneNum = checkPhoneNum(request.form['phoneNum'])
+		# subject = checkSubject(request.form['subject'])
 		addSubscriber(phoneNum, subject)
-
-	return render_template("index.html")
+		return render_template("index.html", phoneNum=phoneNum, subject=subject)
+	return render_template("index.html");
 
 @main.route('/unsubscribe')
 def unsubscribe():
@@ -30,6 +32,10 @@ def removeSubscriber(number):
 	return True
 
 def checkPhoneNum(number):
+	isPhoneNum = re.compile("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$");
+	if not isPhoneNum.match(number):
+		return None
+	re.sub("[^0-9]", "", number)
 	return number
 
 def checkSubject(subject):
