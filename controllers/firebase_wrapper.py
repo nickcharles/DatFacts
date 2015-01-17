@@ -1,19 +1,28 @@
-from firebase import firebase
-from twilio_wrapper import verifyNumber
-
-fb = firebase.FirebaseApplication('https://luminous-fire-1975.firebaseio.com', None)
+import requests
+import json
 
 def getNumbers():
-	result = fb.get('/phoneNumbers', None)
-	return result
+    print "TEST"
+    response = requests.get('https://luminous-fire-1975.firebaseio.com/phoneNumbers.json')
+    print "test"
+    numbers = json.loads(response.text)
+    return numbers
 
 def addNumber(number, subject):
-	if verifyNumber(number) and verifySubject(subject):
-		newVictim = {'count': 1, 'subject': subject}
-		result = fb.post('/phoneNumbers/' + str(number), newVictim)
-		print result
-		return True
+    if verifyNumber(number) and verifySubject(subject):
+        newVictim = {"count": 1, "subject": subject}
+        result = requests.put('https://luminous-fire-1975.firebaseio.com/phoneNumbers/' + number + '.json', data=json.dumps(newVictim))
+        return True
+    return False
+
+def deleteNumber(number):
+    if verifyNumber(number):
+        request = requests.delete('https://luminous-fire-1975.firebaseio.com/phoneNumbers/' + number + '.json')
+
 
 #2488427486
 def verifySubject(subject):
-	return True
+    return True
+
+def verifyNumber(number):
+    return True
