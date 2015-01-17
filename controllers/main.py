@@ -19,10 +19,7 @@ def main_route():
 def unsubscribe():
     if request.method == 'POST':
         phoneNum = request.form['yourNum']
-        newNum = request.form['newNum']
-        subject = request.form['subject']
-        removeSubcriber(phoneNum)
-        addSubscriber(newNum, subject)
+        deleteNumber(phoneNum)
     return render_template("unsub.html")
 
 

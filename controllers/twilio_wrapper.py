@@ -18,6 +18,7 @@ def run_twilio_api():
             victim = numbers[number]
             count = victim["count"]
             subject = victim["subject"]
+            print "this is the subject " + subject
             fact = getFact(subject)
             # message = client.messages.create(to=number, from_=twilioNumber, body=fact)
 
