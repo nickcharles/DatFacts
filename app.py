@@ -1,12 +1,10 @@
 from flask import Flask, render_template
 import controllers
 import thread
-from controllers.twilio_wrapper import run_twilio_api
 
 app = Flask(__name__, template_folder='views')
 
 app.register_blueprint(controllers.main)
-
 
 
 # comment this out using a WSGI like gunicorn

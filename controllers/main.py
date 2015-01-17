@@ -1,6 +1,6 @@
 from flask import *
-from firebase_wrapper import addNumber
 from wikipedia_wrapper import *
+from firebase_wrapper import addNumber, deleteNumber
 import re
 import string
 
@@ -33,6 +33,7 @@ def handle(number, subject):
     print getFact(subject);
     # Add to database
     # addNumber(number, subject)
+    addNumber(number, subject)
     # Begin texting
     return render_template("index.html")
 
