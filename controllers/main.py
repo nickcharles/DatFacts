@@ -30,7 +30,7 @@ def handle(number, subject):
     print getFact(subject);
     # Add to database
     # addNumber(number, subject)
-    addNumber(number, subject)
+    # addNumber(number, subject)
     # Begin texting
     return render_template("index.html")
 
