@@ -40,9 +40,9 @@ def validateInput(number, subject):
     return (number, subject)
 
 def validateNumber(number):
-    isPhoneNum = re.compile("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$")
-    if not isPhoneNum.match(number):
-        return render_template("index.html")
+    # isPhoneNum = re.compile("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$")
+    # if not isPhoneNum.match(number):
+    #     return redirect('/')
     number = re.sub("[^0-9]", "", number)
     return number
 

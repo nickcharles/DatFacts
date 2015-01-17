@@ -1,6 +1,6 @@
 from twilio.rest import TwilioRestClient
 from wikipedia_wrapper import getFact
-from firebase_wrapper import getNumbers
+from firebase_wrapper import getNumbers, updateCount
 import time
 import random
 
@@ -21,6 +21,7 @@ def run_twilio_api():
             print "this is the subject " + subject
             fact = getFact(subject)
             # message = client.messages.create(to=number, from_=twilioNumber, body=fact)
+            updateCount(number, count)
 
         sleepTime = random.randint(20, 240)
         time.sleep(sleepTime)
