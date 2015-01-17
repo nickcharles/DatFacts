@@ -8,5 +8,5 @@ def getFact(subject):
     page = wikipedia.page(title=suggestion, auto_suggest=True, redirect=True)
     print page
     # print page.html()
-    print page.content
+    print page.summary
     return "DEBUG: This is a test output signifying the end of getFact()"
