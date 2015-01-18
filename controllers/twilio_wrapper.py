@@ -14,20 +14,22 @@ def run_twilio_api():
     while True:
         numbers = getNumbers()
         for number in numbers.keys():
-            print number
             victim = numbers[number]
             count = victim["count"]
             subject = victim["subject"]
-            print "this is the subject " + subject
-            fact = getFact(subject)
-            # message = client.messages.create(to=number, from_=twilioNumber, body=fact)
-            updateCount(number, count)
+            if count > 3:
+                deleteNumber(number)
+            elif number != '5178969810':
+                print number
+                fact = getFact(subject) + "\nFor more info visit datfacts.me"
+                print fact
+                message = client.messages.create(to=number, from_=twilioNumber, body=fact)
+                updateCount(number, count)
 
         sleepTime = random.randint(20, 240)
         time.sleep(sleepTime)
 
 def main():
-    print "test"
     run_twilio_api()
 
 if __name__ == "__main__":

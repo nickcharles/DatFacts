@@ -1,4 +1,6 @@
 import wikipedia
+from factStrip import factStrip
+from random import randint
 
 def getFact(subject):
     print "DEBUG: This is the subject"
@@ -10,14 +12,17 @@ def getFact(subject):
         suggestion = subject
         print "DEBUG: No suggestion found for input, set suggestion to subject"
     page = wikipedia.page(title=suggestion, auto_suggest=True, redirect=True)
-    print "DEBUG: This is the page"
-    print page
+    # print "DEBUG: This is the page"
+    # print page
     # print page.html()
-    print "DEBUG: This is the page summary"
+    # print "DEBUG: This is the page summary"
     # print page.summary
     f = open('content.txt', 'w')
     content = page.content
     content = content.encode(encoding='UTF-8')
-    f.write(content)
+    factArray = factStrip(content)
+    randIndex = randint(0, len(factArray) - 1)
+    return factArray[randIndex]
+
+
     # print page.content
-    return "DEBUG: This is a test output signifying the end of getFact()"

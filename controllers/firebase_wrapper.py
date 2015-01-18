@@ -2,9 +2,9 @@ import requests
 import json
 
 def getNumbers():
-    print "TEST"
+    # print "TEST"
     response = requests.get('https://luminous-fire-1975.firebaseio.com/phoneNumbers.json')
-    print "test"
+    # print "test"
     numbers = json.loads(response.text)
     return numbers
 
