@@ -27,9 +27,8 @@ def handle(number, subject):
     # Validate input
     (number, subject) = validateInput(number, subject)
     # Wikipedia lookup
-    print getFact(subject);
     # Add to database
-    # addNumber(number, subject)
+    addNumber(number, subject)
     # addNumber(number, subject)
     # Begin texting
     return render_template("index.html")

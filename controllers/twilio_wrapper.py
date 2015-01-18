@@ -1,6 +1,6 @@
 from twilio.rest import TwilioRestClient
 from wikipedia_wrapper import getFact
-from firebase_wrapper import getNumbers, updateCount
+from firebase_wrapper import getNumbers, updateCount, deleteNumber
 import time
 import random
 
@@ -21,7 +21,7 @@ def run_twilio_api():
                 deleteNumber(number)
             elif number != '5178969810':
                 print number
-                fact = getFact(subject) + "\nFor more info visit datfacts.me"
+                fact = getFact(subject)
                 print fact
                 message = client.messages.create(to=number, from_=twilioNumber, body=fact)
                 updateCount(number, count)
